@@ -10,6 +10,8 @@ const { schemas } = require("../../models/user");
 const router = express.Router();
 
 router.post("/register", validationBody(schemas.registerSchema), controllerWrapper(controller.register));
+router.get("/verify/:verificationToken", controllerWrapper(controller.verifyEmail));
+router.post("/veryfy", validationBody(schemas.verifyEmailSchema), controllerWrapper(controller.resendVerifyEmail));
 router.post("/login", validationBody(schemas.loginSchema), controllerWrapper(controller.login));
 router.get("/current", authenticate, controllerWrapper(controller.getCurrent));
 router.patch("/avatars", authenticate, upload.single("avatar"), controllerWrapper(controller.updateAvatar));
